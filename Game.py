@@ -19,7 +19,7 @@ class Game:
     SCREEN_WIDTH = 500
     SCREEN_HEIGHT = 800
 
-    def __init__(self):
+    def __init__(self, difficulty):
         # Check if is the IA Playing
         self.ia_playing = False
         self.score = 0
@@ -35,6 +35,9 @@ class Game:
         self.networks = []
         # Screem
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
+        # Bonus
+        self.difficulty = difficulty
+
 
     def _print_score_and_generation(self):
         # Add Score in The Screen
@@ -136,7 +139,7 @@ class Game:
         # Create Pipe if is Necessary
         if create_pipe:
             self.score += 1
-            self.pipes.append(Pipe(600))
+            self.pipes.append(Pipe(600, self.difficulty))
 
             for genome in self.genomes_list:
                 genome.fitness += 5
@@ -171,7 +174,7 @@ class Game:
             self.birds = [Bird(230, 350)]
 
         self.floor = Floor(730)
-        self.pipes = [Pipe(700)]
+        self.pipes = [Pipe(700, self.difficulty)]
         score = 0
 
         # Assistant Variable

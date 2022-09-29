@@ -9,7 +9,7 @@ class Pipe:
     DISTANCE = 200
     VELOCITY = 5
 
-    def __init__(self, x):
+    def __init__(self, x, difficulty):
         self.x = x
         self.height = 0
         self.top_position = 0
@@ -19,18 +19,35 @@ class Pipe:
         self.TOP_PIPE = pygame.transform.flip(PIPE_IMAGE, False, True)
         # Controller Props
         self.bird_has_passed = False
+        self.difficulty = difficulty
+        self.direction = -1 if random.randrange(0, 1) == 0 else 1
 
         # Call set_height Function
         self.set_height()
 
+    def _get_distance(self):
+        if self.difficulty == "MEDIUM":
+            return self.DISTANCE - 25
+        else:
+            return self.DISTANCE
+
     def set_height(self):
         self.height = random.randrange(50, 450)
         self.top_position = self.height - self.TOP_PIPE.get_height()
-        self.bottom_position = self.height + self.DISTANCE
+        self.bottom_position = self.height + self._get_distance()
 
     def move(self):
         # The Screen move from Right to Left
         self.x -= self.VELOCITY
+
+        if self.difficulty == "HARD":
+            self.top_position += (1 * self.direction)
+            self.bottom_position += (1 * self.direction)
+
+            if self.bottom_position >= 450:
+                self.direction = -1
+            elif (self.top_position + self.TOP_PIPE.get_height()) <= 50:
+                self.direction = +1
 
     def print(self, screen):
         screen.blit(self.TOP_PIPE, (self.x, self.top_position))

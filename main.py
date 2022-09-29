@@ -2,11 +2,10 @@ import os
 import neat
 
 from Game import Game
+from Menu import Menu
 
-ia_playing = True
 
-
-def execute_ia(config_path):
+def execute_ia(config_path, difficulty):
     config = neat.config.Config(
         neat.DefaultGenome,
         neat.DefaultReproduction,
@@ -20,12 +19,18 @@ def execute_ia(config_path):
     population.add_reporter(neat.StdOutReporter(True))
     population.add_reporter(neat.StatisticsReporter())
 
-    population.run(Game().main, 50)
+    population.run(Game(difficulty).main, 50)
 
 
 if __name__ == "__main__":
-    if ia_playing:
+    menu = Menu()
+    mode = menu.select_mode()
+    difficulty = menu.select_difficulty()
+
+    print(f"Mode: {mode} | Difficulty: {difficulty}")
+
+    if mode == "IA":
         path = os.path.dirname(__file__)
-        execute_ia(os.path.join(path, 'config', 'config.txt'))
+        execute_ia(os.path.join(path, 'config', 'config.txt'), difficulty)
     else:
-        Game().main(None, None)
+        Game(difficulty).main(None, None)
