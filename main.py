@@ -3,7 +3,7 @@ import neat
 
 from Game import Game
 
-ia_playing = False
+ia_playing = True
 
 
 def execute_ia(config_path):
