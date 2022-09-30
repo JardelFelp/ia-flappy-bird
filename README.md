@@ -15,13 +15,6 @@ Foram desenvolvidas as seguintes funcionalidades:
 - Criação de Redes Neurais
 - Aprendizado de Máquina
 
-O projeto ainda possui alguns pontos de melhorias a serem implementados.
-
-## Pontos de Melhorias
-- Menu iniciar
-- Escolha de dificuldade de fases - Jogador
-- Escolha de dificuldade de fases - Inteligência Artificial
-
 ## Ferramentas
 Para desenvolvimento do projeto foram utilizadas as seguintes ferramentas
 
